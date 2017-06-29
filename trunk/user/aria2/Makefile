@@ -1,4 +1,4 @@
-SRC_NAME=aria2-1.15.2
+SRC_NAME=aria2-1.32.0
 
 CFLAGS  += -ffunction-sections -fdata-sections
 CXXFLAGS += -ffunction-sections -fdata-sections
@@ -38,6 +38,8 @@ configure:
 		ZLIB_LIBS="-L$(STAGEDIR)/lib -lz" \
 		OPENSSL_CFLAGS="-I$(STAGEDIR)/include" \
 		OPENSSL_LIBS="-L$(STAGEDIR)/lib -lssl -lcrypto" \
+		LIBXML2_CFLAGS="-I$(STAGEDIR)/include/libxml2" \
+		LIBXML2_LIBS="-L$(STAGEDIR)/lib -lxml2" \
 		--host=$(HOST_TARGET) \
 		--build=$(HOST_BUILD) ; \
 	)
