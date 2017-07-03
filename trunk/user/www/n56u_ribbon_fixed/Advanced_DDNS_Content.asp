@@ -36,7 +36,7 @@ var ddns_prov1 = '<% nvram_get_x("","ddns_server_x"); %>';
 var ddns_prov2 = '<% nvram_get_x("","ddns2_server"); %>';
 var ddns_hname = '<% nvram_get_x("","ddns_hostname_x"); %>';
 var ddns_list = [
-	[ 0x01, "WWW.ASUS.COM",         "(asuscomm)", "" ],
+//	[ 0x01, "WWW.ASUS.COM",         "(asuscomm)", "" ],
 	[ 0x0f, "WWW.DYNDNS.ORG",       "", "https://account.dyn.com/entrance/" ],
 	[ 0x0f, "WWW.TZO.COM",          "", "http://signup.tzo.com" ],
 	[ 0x0f, "WWW.ZONEEDIT.COM",     "", "http://www.zoneedit.com/signUp.html" ],
@@ -48,22 +48,28 @@ var ddns_list = [
 	[ 0x0f, "WWW.SITELUTIONS.COM",  "", "https://sitelutions.com/signup" ],
 	[ 0x0f, "WWW.ZERIGO.COM",       "", "https://www.zerigo.com/managed-dns/" ],
 	[ 0x0f, "WWW.DHIS.ORG",         "", "http://dhis.org/WebEngine.ipo?context=dhis.website.register" ],
-	[ 0x0f, "WWW.NIC.RU",           "(RU-CENTER)", "https://www.nic.ru/dns/service/dns_hosting/dns_master/dynamic_dns.html" ],
+//	[ 0x0f, "WWW.NIC.RU",           "(RU-CENTER)", "https://www.nic.ru/dns/service/dns_hosting/dns_master/dynamic_dns.html" ],
 	[ 0x0f, "WWW.DUCKDNS.ORG",      "", "https://www.duckdns.org/" ],
 	[ 0x0f, "WWW.DTDNS.COM",        "", "https://www.dtdns.com/dtsite/register" ],
 	[ 0x0f, "WWW.OVH.COM",          "", "https://www.ovh.com/" ],
 	[ 0x0f, "WWW.LOOPIA.COM",       "", "https://www.loopia.com/loopiadns/" ],
 	[ 0x0f, "WWW.DUIADNS.NET",      "", "https://www.duiadns.net/services" ],
-	[ 0x0f, "WWW.TUNNELBROKER.NET", "(HE)", "http://www.tunnelbroker.net/register.php" ],
-	[ 0x0f, "DNS.HE.NET",           "(HE)", "http://ipv6.he.net/certification/register.php" ],
+	[ 0x0f, "WWW.TUNNELBROKER.NET", "(HE)", "https://www.tunnelbroker.net/register.php" ],
+	[ 0x0f, "DNS.HE.NET",           "(HE)", "https://ipv6.he.net/certification/register.php" ],
 	[ 0x0f, "DDNSS.DE",             "", "https://www.ddnss.de/user_new.php" ],
 	[ 0x0f, "HOMESERVER.GIRA.DE",   "", "https://homeserver.gira.de/en/registrierung/index.html" ],
 	[ 0x0f, "DOMAINS.GOOGLE.COM",   "", "https://domains.google.com/registrar" ],
 	[ 0x0f, "IPV4.DYNV6.COM",       "", "https://ipv4.dynv6.com/users/sign_up" ],
 	[ 0x0f, "DYNV6.COM",            "", "https://dynv6.com/users/sign_up" ],
-	[ 0x0f, "TB.NETASSIST.UA",      "", "http://tb.netassist.ua/reg.php" ],
+//	[ 0x0f, "TB.NETASSIST.UA",      "", "http://tb.netassist.ua/reg.php" ],
 	[ 0x0f, "IPV4.NSUPDATE.INFO",   "", "https://nsupdate.info/account/register/" ],
-	[ 0x0f, "FREEDNS.AFRAID.ORG",   "", "http://freedns.afraid.org/signup/" ],
+	[ 0x0f, "FREEDNS.AFRAID.ORG",   "", "https://freedns.afraid.org/signup/" ],
+	[ 0x0f, "WWW.STRATO.COM",       "", "https://www.strato.com/" ],
+	[ 0x0f, "WWW.3322.ORG",         "", "http://www.3322.org/" ],
+	[ 0x0f, "WWW.SPDYN.DE",         "", "https://www.spdyn.de/" ],
+	[ 0x0f, "WWW.FREEMYIP.COM",     "", "https://www.freemyip.com/" ],
+	[ 0x0f, "WWW.CLOUDXNS.NET",     "", "https://www.cloudxns.net/" ],
+	[ 0x0f, "WWW.DNSPOD.CN",        "", "https://www.dnspod.cn/" ],
 	[ 0x01, "CUSTOM",               "(http basic auth)", "" ]
 ];
 
@@ -655,9 +661,15 @@ function checkDDNSReturnCode(){
                                             <th><#DDNS_Verbose#></th>
                                             <td>
                                                 <select name="ddns_verbose" class="input" onchange="disable_update();">
-                                                    <option value="0" <% nvram_match_x("", "ddns_verbose", "0","selected"); %>>0 (Quiet)</option>
-                                                    <option value="1" <% nvram_match_x("", "ddns_verbose", "1","selected"); %>>1 (Default)</option>
-                                                    <option value="2" <% nvram_match_x("", "ddns_verbose", "2","selected"); %>>2 (Verbose)</option>
+                                                    <option value="0" <% nvram_match_x("", "ddns_verbose", "0","selected"); %>>0 (Emergency)</option>
+                                                    <option value="1" <% nvram_match_x("", "ddns_verbose", "1","selected"); %>>1 (Alert)</option>
+                                                    <option value="2" <% nvram_match_x("", "ddns_verbose", "2","selected"); %>>2 (Critical)</option>
+                                                    <option value="3" <% nvram_match_x("", "ddns_verbose", "3","selected"); %>>3 (Error)</option>
+                                                    <option value="4" <% nvram_match_x("", "ddns_verbose", "4","selected"); %>>4 (Warning)</option>
+                                                    <option value="5" <% nvram_match_x("", "ddns_verbose", "5","selected"); %>>5 (Notice)</option>
+                                                    <option value="6" <% nvram_match_x("", "ddns_verbose", "6","selected"); %>>6 (Info)</option>
+                                                    <option value="7" <% nvram_match_x("", "ddns_verbose", "7","selected"); %>>7 (Debug)</option>
+                                                    <option value="16" <% nvram_match_x("", "ddns_verbose", "16","selected"); %>>16 (None)</option>
                                                 </select>
                                             </td>
                                         </tr>
