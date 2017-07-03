@@ -928,7 +928,7 @@ write_inadyn_conf(const char *conf_file, int use_delay)
 {
 	FILE *fp;
 	int i_max, i_ddns_source, i_ddns_checkip, i_ddns_period, i_ddns_forced, i_ddns1_ssl;
-	char *ddns1_hname[3], *ddns1_user, *ddns1_pass, *ddns1_svr, *ddns1_url;
+	char *ddns1_hname, *ddns1_user, *ddns1_pass, *ddns1_svr, *ddns1_url;
 	char *ddns2_hname,    *ddns2_user, *ddns2_pass;
 	const char *ddns1_svc, *ddns2_svc;
 	char wan_ifname[16];
@@ -958,9 +958,7 @@ write_inadyn_conf(const char *conf_file, int use_delay)
 	}
 
 	i_ddns1_ssl    = nvram_get_int("ddns_ssl");
-	ddns1_hname[0] = nvram_safe_get("ddns_hostname_x");
-	ddns1_hname[1] = nvram_safe_get("ddns_hostname2_x");
-	ddns1_hname[2] = nvram_safe_get("ddns_hostname3_x");
+	ddns1_hname    = nvram_safe_get("ddns_hostname_x");
 	ddns1_user     = nvram_safe_get("ddns_username_x");
 	ddns1_pass     = nvram_safe_get("ddns_passwd_x");
 
@@ -981,8 +979,6 @@ write_inadyn_conf(const char *conf_file, int use_delay)
 		ether_atoe(nvram_safe_get(mac_nvram), mac_bin);
 		
 		i_ddns1_ssl = 0;
-		ddns1_hname[1] = "";
-		ddns1_hname[2] = "";
 		ddns1_user = ether_etoa3(mac_bin, mac_str);
 		ddns1_pass = nvram_safe_get("secret_code");
 	} else if (strcmp(ddns1_svc, "custom@http_srv_basic_auth") == 0) {
@@ -1026,11 +1022,7 @@ write_inadyn_conf(const char *conf_file, int use_delay)
 			fprintf(fp, "  server-name %s\n", ddns1_svr);
 			fprintf(fp, "  server-url /%s\n", ddns1_url);
 		}
-		fprintf(fp, "  alias %s\n", ddns1_hname[0]);
-		if (strlen(ddns1_hname[1]) > 2)
-			fprintf(fp, "  alias %s\n", ddns1_hname[1]);
-		if (strlen(ddns1_hname[2]) > 2)
-			fprintf(fp, "  alias %s\n", ddns1_hname[2]);
+		fprintf(fp, "  alias %s\n", ddns1_hname);
 		if (nvram_get_int("ddns_wildcard_x"))
 			fprintf(fp, "  wildcard\n");
 		if (ddns2_svc) {
@@ -1104,14 +1096,8 @@ get_ddns_fqdn(void)
 			if (!strstr(ddns_fqdn, ".asuscomm.com"))
 				ddns_fqdn = NULL;
 		} else {
-			if (!strchr(ddns_fqdn, '.')) {
-				ddns_fqdn = nvram_safe_get("ddns_hostname2_x");
-				if (!strchr(ddns_fqdn, '.')) {
-					ddns_fqdn = nvram_safe_get("ddns_hostname3_x");
-					if (!strchr(ddns_fqdn, '.'))
-						ddns_fqdn = NULL;
-				}
-			}
+			if (!strchr(ddns_fqdn, '.'))
+				ddns_fqdn = NULL;
 		}
 	}
 
