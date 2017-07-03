@@ -149,8 +149,6 @@ function change_ddns_server(man)
 	showhide("ddnsname_input", e);
 	showhide("asusddnsname_input", !e);
 	showhide_div("ddns_link", (tourl != ""));
-	showhide_div("row_ddns_hname2", e);
-	showhide_div("row_ddns_hname3", e);
 	showhide_div("row_ddns_user", e);
 	showhide_div("row_ddns_pass", e);
 	showhide_div("row_ddns_ssl", (e && support_ddns_ssl()));
@@ -209,8 +207,6 @@ function ddns_disable()
 	showhide_div("row_ddns_cst_svr", 0);
 	showhide_div("row_ddns_cst_url", 0);
 	showhide_div("row_ddns_hname1", 0);
-	showhide_div("row_ddns_hname2", 0);
-	showhide_div("row_ddns_hname3", 0);
 	showhide_div("row_ddns_user", 0);
 	showhide_div("row_ddns_pass", 0);
 	showhide_div("row_ddns_ssl", 0);
@@ -501,18 +497,6 @@ function checkDDNSReturnCode(){
                                                     <input type="text" name="DDNSName" id="DDNSName" style="width: 110px;" placeholder="<#asusddns_inputhint#>">.asuscomm.com&nbsp;&nbsp;
                                                     <input type="submit" maxlength="15" size="15" class="btn btn-info" style="max-width: 98px;" onClick="return onSubmitApply('hostname_check');" name="x_DDNSHostCheck" value="<#LANHostConfig_x_DDNSHostnameCheck_buttonname#>"/>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr id="row_ddns_hname2">
-                                            <th><a class="help_tooltip" href="javascript:void(0);" onmouseover="openTooltip(this,24,3);"><#LANHostConfig_x_DDNSHostNames_itemname#></a></th>
-                                            <td>
-                                                <input type="text" class="input" maxlength="64" size="48" style="width: 286px;" name="ddns_hostname2_x" value="<% nvram_get_x("","ddns_hostname2_x"); %>" onKeyPress="return is_string(this,event);" />
-                                            </td>
-                                        </tr>
-                                        <tr id="row_ddns_hname3">
-                                            <th><a class="help_tooltip" href="javascript:void(0);" onmouseover="openTooltip(this,24,3);"><#LANHostConfig_x_DDNSHostNames_itemname#></a></th>
-                                            <td>
-                                                <input type="text" class="input" maxlength="64" size="48" style="width: 286px;" name="ddns_hostname3_x" value="<% nvram_get_x("","ddns_hostname3_x"); %>" onKeyPress="return is_string(this,event);" />
                                             </td>
                                         </tr>
                                         <tr id="row_ddns_user">
