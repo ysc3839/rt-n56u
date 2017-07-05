@@ -1072,7 +1072,7 @@ stop_wan(void)
 	};
 	char *svcs_wan[] = {
 		"ntpd",
-		"inadyn",
+//		"inadyn",
 		"igmpproxy",
 		"xupnpd",
 		"udpxy",
