@@ -419,11 +419,13 @@ start_services_once(int is_ap_mode)
 	if (!is_ap_mode) {
 		if (!is_upnp_run())
 			start_upnp();
-		
+
 		if (!nvram_match("lan_stp", "0")) {
 			br_set_stp(IFNAME_BR, 1);
 			br_set_fd(IFNAME_BR, 15);
 		}
+
+		start_ddns(1);
 	} else {
 		start_udpxy(IFNAME_BR);
 #if defined(APP_XUPNPD)
