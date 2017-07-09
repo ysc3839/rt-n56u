@@ -532,6 +532,7 @@ void stop_upnp(void);
 void check_upnp_wanif_changed(char *wan_ifname);
 void update_upnp(void);
 void restart_upnp(void);
+int is_ddns_run(void);
 int ddns_updated_main(int argc, char *argv[]);
 int notify_ddns_update(void);
 int start_ddns(int clear_cache);

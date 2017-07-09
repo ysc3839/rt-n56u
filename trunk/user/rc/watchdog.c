@@ -70,6 +70,7 @@ static int ntpc_tries = 0;
 
 static int httpd_missing = 0;
 static int dnsmasq_missing = 0;
+static int inadyn_missing = 0;
 
 static struct itimerval wd_itv;
 
@@ -980,6 +981,22 @@ dnsmasq_process_check(void)
 	}
 }
 
+/* Sometimes, inadyn crashed, try to re-run it */
+static void
+inadyn_process_check(void)
+{
+	if (!is_ddns_run())
+		inadyn_missing++;
+	else
+		inadyn_missing = 0;
+	
+	if (inadyn_missing > 1) {
+		inadyn_missing = 0;
+		logmessage("watchdog", "inadyn is missing, start again!");
+		start_ddns(0);
+	}
+}
+
 int
 ntpc_updated_main(int argc, char *argv[])
 {
@@ -1078,8 +1095,11 @@ watchdog_on_timer(void)
 	httpd_process_check();
 
 	/* DNS/DHCP server check */
-	if (!is_ap_mode)
+	if (!is_ap_mode) {
 		dnsmasq_process_check();
+		if (nvram_match("ddns_enable_x", "1"))
+			inadyn_process_check();
+	}
 
 	inet_handler(is_ap_mode);
 
