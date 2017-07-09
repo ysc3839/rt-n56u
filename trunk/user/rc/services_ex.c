@@ -830,6 +830,12 @@ restart_upnp(void)
 ///////////////////////////////////////////////////////////////////////
 
 int
+is_ddns_run(void)
+{
+	return pids("inadyn");
+}
+
+int
 ddns_updated_main(int argc, char *argv[])
 {
 	// Purge dnsmasq cache
