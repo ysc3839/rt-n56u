@@ -1005,9 +1005,9 @@ write_inadyn_conf(const char *conf_file)
 #endif
 
 		if (strlen(ddns1_user) > 0)
-			fprintf(fp, "  username = %s\n", ddns1_user);
+			fprintf(fp, "  username = \"%s\"\n", ddns1_user);
 		if (strlen(ddns1_pass) > 0)
-			fprintf(fp, "  password = %s\n", ddns1_pass);
+			fprintf(fp, "  password = \"%s\"\n", ddns1_pass);
 
 		if (i_ddns_source == 0 && inadyn_checkip_url[i_ddns_checkip].server) {
 			fprintf(fp, "  checkip-server = %s\n", inadyn_checkip_url[i_ddns_checkip].server);
@@ -1027,7 +1027,7 @@ write_inadyn_conf(const char *conf_file)
 		fprintf(fp, "}\n\n");
 
 		if (ddns2_svc) {
-			fprintf(fp, "provider %s {\n", ddns2_svc);
+			fprintf(fp, "provider x%s {\n", ddns2_svc);
 
 #if defined (SUPPORT_DDNS_SSL)
 			if (nvram_get_int("ddns2_ssl"))
@@ -1037,9 +1037,9 @@ write_inadyn_conf(const char *conf_file)
 #endif
 
 			if (strlen(ddns2_user) > 0)
-				fprintf(fp, "  username = %s\n", ddns2_user);
+				fprintf(fp, "  username = \"%s\"\n", ddns2_user);
 			if (strlen(ddns2_pass) > 0)
-				fprintf(fp, "  password = %s\n", ddns2_pass);
+				fprintf(fp, "  password = \"%s\"\n", ddns2_pass);
 			fprintf(fp, "  hostname = { %s }\n", ddns2_hname);
 
 			fprintf(fp, "}\n\n");
