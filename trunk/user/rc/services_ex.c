@@ -1011,7 +1011,7 @@ write_inadyn_conf(const char *conf_file)
 
 		if (i_ddns_source == 0 && inadyn_checkip_url[i_ddns_checkip].server) {
 			fprintf(fp, "  checkip-server = %s\n", inadyn_checkip_url[i_ddns_checkip].server);
-			fprintf(fp, "  checkip-server = \"%s\"\n", inadyn_checkip_url[i_ddns_checkip].path);
+			fprintf(fp, "  checkip-path = \"%s\"\n", inadyn_checkip_url[i_ddns_checkip].path);
 			fprintf(fp, "  checkip-ssl = false\n"); // FIXME
 		}
 
